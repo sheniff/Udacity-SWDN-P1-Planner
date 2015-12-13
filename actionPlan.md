@@ -5,10 +5,10 @@
 * Note: structure folders in html/css/js/lib for further minification and stuff
 
 ## Before starting...
-- Set up gh project
+- [x] Set up gh project
 - [x] Set up gulp for project
-- Finish High Conversion Forms course
-- Finish Tools course
+- [x] Finish High Conversion Forms course
+- [ ] Finish Tools course
 - [x] Install Bootstrap for project
 
 ## FormView: Sign up
@@ -42,6 +42,7 @@
     - additional styling for validation (showing a small tick or cross in form)
     - spinner for saving process in "Sign Up" button
     - take care of using fonts with proper resizing for handheld devices
+    - use em for font sizes!! (for proper resizing)
   - desktop later
     - label to left
     - automatic focus in first field
