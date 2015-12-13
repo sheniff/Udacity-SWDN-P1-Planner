@@ -11,7 +11,7 @@
     "SeniorWebDev",
     "p1"
   ],
-  "author": "Sergio Almecija (sheniff@gmail.com)",
+  "author": "Sergio Almecija <sheniff@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2.10.0",
