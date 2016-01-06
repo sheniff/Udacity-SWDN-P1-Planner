@@ -9,24 +9,115 @@
 
   <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="/css/app.css">
+  <script src="/lib/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 
+  <progress value="0" max="3"></progress>
+
   <div class="container">
 
-    <form class="form-signup">
+    <form id="signUp" class="form-signup">
       <h2 class="form-signup-heading">Event Planner <small>sign up</small></h2>
 
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <div class="form-group text-center">
+        <img src="/img/default.jpg" alt="gravatar" id="gravatarImg" class="img img-thumbnail img-responsive img-circle">
+      </div>
 
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <div class="form-group">
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+        <label for="inputName" class="sr-only">User name</label>
+        <input name="username" type="text" id="inputName" class="form-control" placeholder="User name" required>
+
+        <div class="input-group">
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <span class="input-group-btn">
+            <a type="text" class="btn btn-default" title="Reveal password">
+              <i class="glyphicon glyphicon-eye-open"></i>
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <div class="bio-collapsible collapsed">
+        <div class="subsection">
+          <label>Full bio (optional)</label>
+
+          <div class="form-group">
+            <label for="inputFullName" class="sr-only">Full name</label>
+            <input name="fullname" type="text" id="inputFullName" class="form-control" placeholder="Full name">
+          </div>
+
+          <div class="form-group">
+            <label for="inputBirthdate">Date of birth</label>
+            <input name="birthday" type="datetime-local" id="inputBirthdate" class="form-control" placeholder="Date of birth">
+          </div>
+
+          <div class="form-group">
+            <label for="inputCompany" class="sr-only">Company</label>
+            <input name="company" type="text" id="inputCompany" class="form-control" placeholder="Company">
+          </div>
+        </div>
+
+      </div>
 
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
     </form>
 
   </div> <!-- /container -->
 
+  <script src="/js/IssueTracker.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/FormValidator.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/PasswordRevealer.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/NamePrepopulator.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/OptionalFieldsRevealer.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/md5.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/GravatarFetcher.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/ProgressTracker.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/DataStore.js" type="text/javascript" charset="utf-8"></script>
+
+  <script type="text/javascript" charset="utf-8" defer>
+
+    var form = document.querySelector('form#signUp');
+    var dataStore = new DataStore();
+
+    // redirect to 'events' if logged in
+    if(dataStore.isLoggedIn()) {
+      window.location.href = 'events.html';
+    }
+
+    // Enable password validation and validation on blur
+    var formValidator = new FormValidator(form);
+    formValidator.enablePasswordValidation();
+    // formValidator.validateOnBlur();
+
+    // Enable password reveal toggle
+    new PasswordRevealer(form.querySelector('.input-group')).enableToggle();
+
+    // Name autocomplete (when valid email focusout and no name set)
+    new NamePrepopulator(form).enable();
+
+    // Optional fields revealer
+    new OptionalFieldsRevealer(form.querySelector('.bio-collapsible')).enable();
+
+    // Gravatar Fetcher
+    new GravatarFetcher(form.querySelector('#inputEmail')).attachTo(document.querySelector('#gravatarImg'));
+
+    // Progress Bar
+    new ProgressTracker(document.querySelector('progress'), form).enable();
+
+    // Submit valid form and redirect to list of events
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      var userData = $(event.target).serializeArray();
+      dataStore.login(userData);
+
+      window.location.href = 'events.html';
+    });
+  </script>
 </body>
 </html>

@@ -13,6 +13,7 @@ gulp.task('serve', ['style'], function() {
   });
 
   gulp.watch('scss/**/*.scss', ['style']);
+  gulp.watch('js/*.js').on('change', browserSync.reload);
   gulp.watch('*.html').on('change', browserSync.reload);
 
 });
@@ -21,9 +22,7 @@ gulp.task('serve', ['style'], function() {
 gulp.task('style', function() {
   return gulp.src('scss/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions']
-    }))
+    .pipe(autoprefixer())
     .pipe(gulp.dest('css'))
     .pipe(browserSync.stream());
 });

@@ -14,25 +14,27 @@
 ## FormView: Sign up
 - Layout form fields
   - Email
-    - validate "email" and "required"
+    - [x] validate "email" and "required"
+    - [x] Use Gravatar api to fetch user's picture when valid email
   - Name
-    - Auto populate with email once filled in if no value yet :)
-    - validate "required"
+    - [x] Auto populate with email once filled in if no value yet :)
+    - [x] validate "required"
   - Password
-    - Make secure validation (as done in high conversion form course)
-    - Add option to reveal password (eye icon) instead of asking the user for repeating the password (that's annoying and so '90s...)
+    - [x] Make secure validation (as done in high conversion form course)
+    - [x] Add option to reveal password (eye icon) instead of asking the user for repeating the password (that's annoying and so '90s...)
   - Optional bio
-    - Idea: we can show this bio section separated with a horizontal line and only showing one of the fields and make the rest appear when the user focuses on the first one? Or under a collapsed courtain (TBD)
+    - [x] Idea: we can show this bio section separated with a horizontal line and only showing one of the fields and make the rest appear when the user focuses on the first one? Or under a collapsed courtain (TBD)
 
 - Apply usability strategies
-  - labels
-  - placeholders
-  - validation (html5 validation) in focus out
-  - progress bar that fills in with valid fields
-  - do not enable "save" until progress bar is full (optional fields should not affect the progress)
+  - [x] labels
+  - [x] placeholders
+  - [x] progress bar that fills in with valid fields
+  - [! ToDo: investigate how] validation (html5 validation) in focus out
+  - [! ToDo: requires validation on blur to work properly] do not enable "save" until progress bar is full (optional fields should not affect the progress)
   - Clearly indicate mandatory fields (typical asterisk?)
   - Include aria info for screen readers
-  - Allow proper jump between form fields (with tab or arrow in phone)
+  - Include auto-complete by using autofill and autocomplete
+  - [x] Allow proper jump between form fields (with tab or arrow in phone)
 
 - Styling (CSS)
   - Mobile first
@@ -49,8 +51,8 @@
     - maybe password validation can be done while typing showing tick/cross to right of field?
 
 - Other strategies
-  - Store in local storage to pretend some kind of persistence
-  - This persistence is useful to show suggested guests :)
+  - [x] Store in local storage to pretend some kind of persistence
+  - [x] This persistence is useful to show suggested guests :)
 
 
 ## FormView: New event
@@ -97,6 +99,7 @@
   - List all the events as cards :D for phone version at least
   - Include buttons to alert "going"/"not going"
 - New event option to the top (fixed, for easier access)
+- Logout button
 
 
 ## Automated build process
