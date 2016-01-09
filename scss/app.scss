@@ -92,6 +92,22 @@ body {
   }
 }
 
+.events {
+  padding-top: 70px;
+
+  #newEvent {
+    background-color: #ddd;
+    border-left: 1px solid #bbb;
+    transition: 0.3s;
+
+    &:hover,
+    &:active {
+      background-color: #777;
+      color: #ddd;
+    }
+  }
+}
+
 progress {
   width: 100%;
 }

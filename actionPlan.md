@@ -96,9 +96,9 @@
 
 ## View: Created events
 - List of events
-  - List all the events as cards :D for phone version at least
-  - Include buttons to alert "going"/"not going"
-- New event option to the top (fixed, for easier access)
+  - [x] List all the events as cards :D for phone version at least
+  - [x] Include buttons to alert "going"/"not going"
+- [x] New event option to the top (fixed, for easier access)
 - Logout button
 
 

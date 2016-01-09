@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <title>Event Planner - Events</title>
+
+  <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <script src="/lib/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body class="events">
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <span class="navbar-brand" href="#">
+          My events
+          <small> // <span id="username"></span> <a href="javascript:myEventsLogout()" title="Log out">(Log out)</a></small>
+        </span>
+        <a id="newEvent" class="navbar-brand pull-right" href="#">+ New event</a>
+      </div>
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <div class="container">
+
+    <div id="eventsList"></div>
+
+  </div> <!-- /container -->
+
+  <!-- Event Template -->
+  <script type="text/html" id="eventTemplate">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <small class="start pull-right"></small>
+          <span class="name"></span>
+          <br>
+          <em>by <span class="host"></span></em>
+        </h3>
+      </div>
+
+      <div class="panel-body">
+        <div> From <strong class="start"></strong> </div>
+        <div> To <strong class="end"></strong> </div>
+        <div> At <strong class="location"></strong> </div>
+
+        <div>
+          Guests:
+          <div class="guests"></div>
+        </div>
+
+        <div><em class="message"></em></div>
+      </div>
+
+      <div class="panel-footer">
+        <button type="button" class="btn btn-success">
+          <i class="glyphicon glyphicon-ok"></i>
+          Going
+        </button>
+        <button type="button" class="btn btn-danger pull-right">
+          <i class="glyphicon glyphicon-remove"></i>
+          Not Going
+        </button>
+      </div>
+    </div>
+  </script>
+
+  <!-- No events template -->
+  <script type="text/html" id="noEventsTemplate">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <em>You have no upcoming events. Try creating a new one!</em>
+      </div>
+    </div>
+  </script>
+
+  <script src="/js/DataStore.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/EventPrinter.js" type="text/javascript" charset="utf-8"></script>
+
+  <script type="text/javascript" charset="utf-8" defer>
+
+    var dataStore = new DataStore();
+
+    var domEventListHolder = document.querySelector('#eventsList');
+    var domEventTemplate = document.querySelector('script#eventTemplate');
+    var domNoEventsTemplate = document.querySelector('script#noEventsTemplate');
+
+    var eventPrinter = new EventPrinter(domEventListHolder, domEventTemplate, domNoEventsTemplate);
+
+    // redirect to 'signup' if not logged in
+    if(!dataStore.isLoggedIn()) {
+      window.location.href = 'signup.html';
+    }
+
+    // show logged in username
+    document.querySelector('#username').innerHTML = dataStore.userInfo().username;
+
+    // enable logout action
+    window.myEventsLogout = function() {
+      dataStore.logout();
+      window.location.href = 'signup.html';
+    };
+
+    var events = [{
+      start: new Date(),
+      end: new Date(),
+      name: 'Super paartyyy!',
+      host: 'Mary Ann'
+    }, {
+      start: new Date(),
+      end: new Date(),
+      name: 'Super paartyyy!',
+      host: 'Mary Ann'
+    }];
+
+    eventPrinter.printEvents(events);
+
+  </script>
+</body>
+</html>

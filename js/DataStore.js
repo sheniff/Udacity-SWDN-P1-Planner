@@ -5,9 +5,11 @@ function DataStore() {
 
   this.USERS_KEY = 'UdacityEventPlannerUsers';
   this.CURRENT_USER_KEY = 'UdacityEventPlannerCurrentUser';
+  this.EVENTS_KEY = 'UdacityEventPlannerEvents';
 
   this.users = JSON.parse(localStorage.getItem(this.USERS_KEY)) || {};
   this.currentUser = JSON.parse(localStorage.getItem(this.CURRENT_USER_KEY));
+  this.events = JSON.parse(localStorage.getItem(this.EVENTS_KEY)) || [];
 }
 
 DataStore.prototype.isLoggedIn = function() {
@@ -16,6 +18,19 @@ DataStore.prototype.isLoggedIn = function() {
 
 DataStore.prototype.userInfo = function() {
   return this.currentUser;
+};
+
+DataStore.prototype.userEvents = function() {
+  var events = [];
+
+  if(!this.currentUser) {
+    return events;
+  }
+
+  // return those events owned by current user or those where s/he was invited
+  return this.events.filter(function(evt) {
+    return evt.host === this.currentUser.email || evt.guests.includes(this.currentUser.email);
+  });
 };
 
 DataStore.prototype.login = function(user) {
