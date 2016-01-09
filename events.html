@@ -21,7 +21,7 @@
           My events
           <small> // <span id="username"></span> <a href="javascript:myEventsLogout()" title="Log out">(Log out)</a></small>
         </span>
-        <a id="newEvent" class="navbar-brand pull-right" href="#">+ New event</a>
+        <a id="newEvent" class="navbar-brand pull-right" href="newevent.html">+ New event</a>
       </div>
     </div><!-- /.container-fluid -->
   </nav>
@@ -107,17 +107,7 @@
       window.location.href = 'signup.html';
     };
 
-    var events = [{
-      start: new Date(),
-      end: new Date(),
-      name: 'Super paartyyy!',
-      host: 'Mary Ann'
-    }, {
-      start: new Date(),
-      end: new Date(),
-      name: 'Super paartyyy!',
-      host: 'Mary Ann'
-    }];
+    var events = dataStore.userEvents();
 
     eventPrinter.printEvents(events);
 
