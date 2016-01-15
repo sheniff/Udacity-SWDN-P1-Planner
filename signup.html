@@ -17,7 +17,7 @@
 
   <div class="container">
 
-    <form id="signUp" class="form-signup">
+    <form id="signUp" class="form-signup" autocomplete>
       <h2 class="form-signup-heading">Event Planner <small>sign up</small></h2>
 
       <div class="form-group text-center">
@@ -25,15 +25,21 @@
       </div>
 
       <div class="form-group">
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputEmail">Email <small class="text-muted">(required)</small></label>
+        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="you@example.org" required autofocus autocomplete="email">
+        <i class="glyphicon glyphicon-ok text-success"></i>
+      </div>
 
-        <label for="inputName" class="sr-only">User name</label>
-        <input name="username" type="text" id="inputName" class="form-control" placeholder="User name" required>
+      <div class="form-group">
+        <label for="inputName">User name <small class="text-muted">(required)</small></label>
+        <input name="username" type="text" id="inputName" class="form-control" placeholder="jonnyjoe" required>
+        <i class="glyphicon glyphicon-ok text-success"></i>
+      </div>
 
+      <div class="form-group">
+        <label for="inputPassword">Password <small class="text-muted">(required)</small></label>
         <div class="input-group">
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <input name="password" type="password" id="inputPassword" class="form-control" placeholder="R3memberM3!" required data-container="body" data-toggle="popover" data-placement="top" data-trigger="focus" data-html="true">
           <span class="input-group-btn">
             <a type="text" class="btn btn-default" title="Reveal password">
               <i class="glyphicon glyphicon-eye-open"></i>
@@ -43,23 +49,21 @@
       </div>
 
       <div class="bio-collapsible collapsed">
-        <div class="subsection">
-          <label>Full bio (optional)</label>
+        <label>Full bio (optional)</label>
 
-          <div class="form-group">
-            <label for="inputFullName" class="sr-only">Full name</label>
-            <input name="fullname" type="text" id="inputFullName" class="form-control" placeholder="Full name">
-          </div>
+        <div class="form-group">
+          <label for="inputFullName">Full name</label>
+          <input name="fullname" type="text" id="inputFullName" class="form-control" placeholder="John Grissham" autocomplete="name">
+        </div>
 
-          <div class="form-group">
-            <label for="inputBirthdate">Date of birth</label>
-            <input name="birthday" type="datetime-local" id="inputBirthdate" class="form-control" placeholder="Date of birth">
-          </div>
+        <div class="form-group">
+          <label for="inputBirthdate">Date of birth</label>
+          <input name="birthday" type="date" id="inputBirthdate" class="form-control" placeholder="Date of birth">
+        </div>
 
-          <div class="form-group">
-            <label for="inputCompany" class="sr-only">Company</label>
-            <input name="company" type="text" id="inputCompany" class="form-control" placeholder="Company">
-          </div>
+        <div class="form-group">
+          <label for="inputCompany">Company</label>
+          <input name="company" type="text" id="inputCompany" class="form-control" placeholder="Yahoo Inc">
         </div>
 
       </div>
@@ -78,6 +82,9 @@
   <script src="/js/GravatarFetcher.js" type="text/javascript" charset="utf-8"></script>
   <script src="/js/ProgressTracker.js" type="text/javascript" charset="utf-8"></script>
   <script src="/js/DataStore.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/PasswordRequirementsPopover.js" type="text/javascript" charset="utf-8"></script>
+
+  <script src="/lib/bootstrap/dist/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 
   <script type="text/javascript" charset="utf-8" defer>
 
@@ -92,7 +99,10 @@
     // Enable password validation and validation on blur
     var formValidator = new FormValidator(form);
     formValidator.enablePasswordValidation();
-    // formValidator.validateOnBlur();
+    formValidator.validateOnChange();
+
+    // Enable password requirements popover
+    new PasswordRequirementsPopover('[data-toggle="popover"]', 'input[type="password"]').enable();
 
     // Enable password reveal toggle
     new PasswordRevealer(form.querySelector('.input-group')).enableToggle();

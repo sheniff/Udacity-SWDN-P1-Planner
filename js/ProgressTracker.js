@@ -1,4 +1,4 @@
-function ProgressTracker(progressBar, form) {
+function ProgressTracker(progressBar, form, disableSubmit) {
   if(!progressBar) {
     return console.error('No progressBar provided!');
   }
@@ -11,6 +11,7 @@ function ProgressTracker(progressBar, form) {
   this.requiredFields = form.querySelectorAll('input[required]');
   this.validFields = [];
   this.submit = form.querySelector('[type="submit"]');
+  this.disableSubmit = disableSubmit; // when not ready
 }
 
 /*
@@ -22,7 +23,7 @@ ProgressTracker.prototype.enable = function() {
   for (var i = 0; i < this.requiredFields.length; i++) {
     var field = this.requiredFields[i];
 
-    field.addEventListener('blur', function(event) {
+    field.addEventListener('keyup', function(event) {
       this.updateTracker(event.target);
     }.bind(this));
   }
@@ -52,10 +53,12 @@ ProgressTracker.prototype.updateProgressBar = function() {
   this.progressBar.max = this.requiredFields.length;
   this.progressBar.value = this.validFields.length;
 
-  if(this.progressBar.value === this.progressBar.max) {
-    this.submit.removeAttribute('disabled');
-  } else {
-    this.submit.setAttribute('disabled', 'disabled');
+  if(this.disableSubmit) {
+    if(this.progressBar.value === this.progressBar.max) {
+      this.submit.removeAttribute('disabled');
+    } else {
+      this.submit.setAttribute('disabled', 'disabled');
+    }
   }
 
   return this;

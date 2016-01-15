@@ -1,22 +1,22 @@
 function FormValidator (form) {
   if (!form) return;
 
-  this.emailInput = form.querySelector('input[type="email"]');
   this.passwordInput = form.querySelector('input[type="password"]');
+  this.requiredFields = form.querySelectorAll('input[required]');
   this.submit = form.querySelector('[type="submit"]');
 };
 
-// ToDo: Find a way to do this!!
-// Investigate: How to show default validation messages when focus out/blur
-// FormValidator.prototype.validateOnBlur = function() {
-//   this.emailInput.addEventListener('blur', function(event) {
+FormValidator.prototype.validateOnChange = function() {
 
-//     if(!event.target.validity.valid) {
-//       this.submit.click();
-//     }
+  for (var i = 0; i < this.requiredFields.length; i++) {
+    var field = this.requiredFields[i];
 
-//   }.bind(this));
-// };
+    field.addEventListener('keyup', function(event) {
+      this.parentNode.classList[event.target.validity.valid ? 'add' : 'remove']('valid');
+    }.bind(field));
+  }
+
+};
 
 FormValidator.prototype.enablePasswordValidation = function() {
   var validatePassword = function () {
@@ -33,7 +33,7 @@ FormValidator.prototype.enablePasswordValidation = function() {
 
   // enable when clicking submit
   this.submit.addEventListener('click', validatePassword);
-  // this.passwordInput.addEventListener('blur', validatePassword);
+  this.passwordInput.addEventListener('keyup', validatePassword);
 };
 
 /*

@@ -29,7 +29,9 @@ DataStore.prototype.userEvents = function() {
 
   // return those events owned by current user or those where s/he was invited
   return this.events.filter(function(evt) {
-    return evt.host === this.currentUser.email || evt.guests.includes(this.currentUser.email);
+    return evt.creator === this.currentUser.email ||
+      evt.host === this.currentUser.email ||
+      evt.guests.includes(this.currentUser.email);
   });
 };
 

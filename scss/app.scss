@@ -1,6 +1,4 @@
 body {
-  // padding-top: 40px;
-  // padding-bottom: 40px;
   background-color: #eee;
 }
 
@@ -22,25 +20,31 @@ body {
   }
 
   .form-group {
-    input,
-    input#inputName {
-      border-radius: 0;
-      margin-bottom: -1px;
+
+    input {
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
 
-    input:first-of-type {
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
+    & > .glyphicon-ok {
+      visibility: hidden;
+      position: absolute;
+      right: 10px;
+      top: 40px;
     }
 
-    input:last-of-type {
-      border-bottom-left-radius: 4px;
-      border-bottom-right-radius: 4px;
+    &.valid {
+      position: relative;
+
+      & > .glyphicon-ok {
+        visibility: visible;
+      }
     }
 
     .input-group {
       input {
-        margin-bottom: 10px;
         border-bottom-left-radius: 4px!important;
       }
 
@@ -54,36 +58,53 @@ body {
         }
       }
     }
+
+    input.valid {
+      border-color: #008000;
+      background-color: #C3FFC3;
+
+      &:after {
+        content: "ok";
+      }
+    }
   }
 
   .bio-collapsible {
     overflow: hidden;
     transition: .5s max-height ease-in-out;
-    max-height: 300px;
+    max-height: 320px;
     position: relative;
+    border: 1px solid #777;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
 
     &.collapsed {
-      max-height: 100px;
+      max-height: 40px;
+      cursor: pointer;
+
+      & > * {
+        cursor: pointer;
+      }
+
+      &:hover {
+        background-color: #fff;
+      }
 
       &:after {
-        content: " ";
-        bottom: 0;
+        content: "+";
         position: absolute;
-        width: 100%;
-        height: 40px;
-        background: linear-gradient(to bottom, transparent 0%, #eee 70%);
+        top: 1px;
+        right: 10px;
+        font-size: 30px;
+        line-height: 30px;
+        color: #777;
       }
     }
 
-    .subsection {
-      border: 1px solid #777;
-      padding: 5px;
-      margin-bottom: 15px;
-
-      & > label {
-        color: #777;
-        margin-bottom: 10px;
-      }
+    & > label {
+      color: #777;
+      margin-bottom: 10px;
     }
   }
 

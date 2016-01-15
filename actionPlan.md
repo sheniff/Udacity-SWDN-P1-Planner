@@ -24,16 +24,19 @@
     - [x] Add option to reveal password (eye icon) instead of asking the user for repeating the password (that's annoying and so '90s...)
   - Optional bio
     - [x] Idea: we can show this bio section separated with a horizontal line and only showing one of the fields and make the rest appear when the user focuses on the first one? Or under a collapsed courtain (TBD)
+      -> UPDATE: change this "courtained" fields for a button saying "more about you (optional)" and then show the fields if clicked
 
 - Apply usability strategies
+  - [x] Clearly indicate mandatory fields (typical asterisk?)
+  - Include aria info for screen readers
+  - [x] Autofill & Autocomplete
+  - [x] Include examples in placeholder instead of the labels
+  - [x] Disable selection
   - [x] labels
   - [x] placeholders
   - [x] progress bar that fills in with valid fields
-  - [! ToDo: investigate how] validation (html5 validation) in focus out
-  - [! ToDo: requires validation on blur to work properly] do not enable "save" until progress bar is full (optional fields should not affect the progress)
-  - Clearly indicate mandatory fields (typical asterisk?)
-  - Include aria info for screen readers
-  - Include auto-complete by using autofill and autocomplete
+  - [x] validation (html5 validation) in focus out
+  - [x] do not enable "save" until progress bar is full (optional fields should not affect the progress)
   - [x] Allow proper jump between form fields (with tab or arrow in phone)
 
 - Styling (CSS)
