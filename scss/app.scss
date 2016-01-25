@@ -2,6 +2,39 @@ body {
   background-color: #eee;
 }
 
+// Global
+
+progress {
+  width: 100%;
+}
+
+.form-group {
+
+  input {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  & > .glyphicon-ok {
+    visibility: hidden;
+    position: absolute;
+    right: 10px;
+    top: 40px;
+  }
+
+  &.valid {
+    position: relative;
+
+    & > .glyphicon-ok {
+      visibility: visible;
+    }
+  }
+}
+
+// Per-page specifics
+
 .form-signup {
   max-width: 330px;
   padding: 15px;
@@ -16,56 +49,6 @@ body {
 
     &:focus {
       z-index: 2;
-    }
-  }
-
-  .form-group {
-
-    input {
-      -moz-user-select: none;
-      -webkit-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    & > .glyphicon-ok {
-      visibility: hidden;
-      position: absolute;
-      right: 10px;
-      top: 40px;
-    }
-
-    &.valid {
-      position: relative;
-
-      & > .glyphicon-ok {
-        visibility: visible;
-      }
-    }
-
-    .input-group {
-      input {
-        border-bottom-left-radius: 4px!important;
-      }
-
-      .input-group-btn {
-        vertical-align: top;
-
-        .btn {
-          padding-top: 10px;
-          padding-bottom: 12px;
-          border-top-right-radius: 0;
-        }
-      }
-    }
-
-    input.valid {
-      border-color: #008000;
-      background-color: #C3FFC3;
-
-      &:after {
-        content: "ok";
-      }
     }
   }
 
@@ -111,6 +94,14 @@ body {
   #gravatarImg {
     max-width: 50%;
   }
+
+  .form-group {
+    .input-group .input-group-btn .btn {
+      padding-top: 10px;
+      padding-bottom: 12px;
+    }
+  }
+
 }
 
 .events {
@@ -127,8 +118,4 @@ body {
       color: #ddd;
     }
   }
-}
-
-progress {
-  width: 100%;
 }

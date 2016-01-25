@@ -21,41 +21,73 @@
       <h2 class="form-signup-heading">Event Planner <small>New event</small></h2>
 
       <div class="form-group">
-        <label for="inputTitle" class="sr-only">Event title</label>
-        <input name="title" type="text" id="inputTitle" class="form-control" placeholder="Event title" required autofocus>
+        <label for="inputTitle">
+          Title
+          <small class="text-muted">(required)</small>
+        </label>
+        <input name="title" type="text" id="inputTitle" class="form-control" placeholder="Dinner at Joe's" required autofocus>
+        <i class="glyphicon glyphicon-ok text-success"></i>
       </div>
 
       <div class="form-group">
-        <label for="inputType" class="sr-only">Type</label>
-        <input name="type" type="text" id="inputType" class="form-control" placeholder="Type of event">
-      </div>
-
-      <div class="form-group">
-        <label for="inputHost" class="sr-only">Host</label>
-        <input name="host" type="text" id="inputHost" class="form-control" placeholder="Host">
+        <label for="inputType">
+          Type
+          <small class="text-muted">(required)</small>
+        </label>
+        <input name="type" type="text" list="reasons" id="inputType" class="form-control" placeholder="Informal meeting" required>
+        <datalist id="reasons">
+          <option value="Dinner"></option>
+          <option value="Get together"></option>
+          <option value="Lunch"></option>
+          <option value="Informal meeting"></option>
+          <option value="Important discussion"></option>
+          <option value="Work meeting"></option>
+        </datalist>
+        <i class="glyphicon glyphicon-ok text-success"></i>
       </div>
 
       <div class="row">
         <div class="col-xs-6">
           <div class="form-group">
-            <label for="inputStart" class="sr-only">Start time</label>
-            <input name="start" type="text" id="inputStart" class="form-control" placeholder="Event start">
+            <label for="inputStart">
+              From
+              <small class="text-muted">(required)</small>
+            </label>
+            <input name="start" type="datetime-local" id="inputStart" class="form-control" required>
           </div>
         </div>
 
         <div class="col-xs-6">
           <div class="form-group">
-            <label for="inputEnd" class="sr-only">End time</label>
-            <input name="end" type="text" id="inputEnd" class="form-control" placeholder="Event end">
+            <label for="inputEnd">
+              To
+              <small class="text-muted">(required)</small>
+            </label>
+            <input name="end" type="datetime-local" id="inputEnd" class="form-control" required>
           </div>
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" id="inputHostGroup">
+        <label for="inputHost" class="">Host</label>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <a type="text" class="btn btn-default choose-myself" title="Add guest">Myself</a>
+            <button type="text" class="btn btn-link" disabled>or</button>
+          </span>
+          <input name="host" type="text" id="inputHost" class="form-control" placeholder="james@example.org" list="hosts">
+          <datalist id="hosts"></datalist>
+        </div>
+      </div>
+
+      <div class="form-group" id="guestsListGroup">
+
+        <label for="inputGuest" class="">Guests</label>
         <ul id="guests"></ul>
         <div class="input-group">
-          <label for="inputGuest" class="sr-only">Add guest</label>
-          <input name="start" type="text" id="inputGuest" class="form-control" placeholder="Add guest">
+          <input name="inputGuests" type="email" id="inputGuest" class="form-control" placeholder="myguest@example.org" list="guestSuggestions">
+          <datalist id="guestSuggestions"></datalist>
+
           <span class="input-group-btn">
             <a type="text" class="btn btn-default" title="Add guest">
               <i class="glyphicon glyphicon-plus"></i>
@@ -63,14 +95,15 @@
           </span>
         </div>
       </div>
+<!-- ~~~~~ Next: add geolocation by using gps API to prepopulate "location" here -->
 
       <div class="form-group">
-        <label for="inputLocation" class="sr-only">Location</label>
+        <label for="inputLocation" class="">Location</label>
         <input name="location" type="text" id="inputLocation" class="form-control" placeholder="Location">
       </div>
 
       <div class="form-group">
-        <label for="inputMessage" class="sr-only">Message</label>
+        <label for="inputMessage" class="">Message</label>
         <textarea id="inputMessage" name="message" placeholder="Optional message" class="form-control" rows="6"></textarea>
       </div>
 
@@ -87,6 +120,9 @@
   </div> <!-- /container -->
 
   <script src="/js/DataStore.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/FormValidator.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/HostInput.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/GuestsList.js" type="text/javascript" charset="utf-8"></script>
 
   <script type="text/javascript" charset="utf-8" defer>
 
@@ -100,6 +136,14 @@
 
     // Enable form validation
     var formValidator = new FormValidator(form);
+    formValidator.validateOnChange();
+
+    // Enable actions for host input
+    new HostInput('#inputHostGroup').enable();
+
+    // Enable actions for guests list
+    new GuestsList('#guestsListGroup').enable();
+
 
     // Submit valid form and redirect to list of events
     form.addEventListener('submit', function(event) {

@@ -67,3 +67,7 @@ DataStore.prototype.toObject = function(array) {
 
   return o;
 };
+
+DataStore.prototype.getUsers = function() {
+  return this.users;
+};

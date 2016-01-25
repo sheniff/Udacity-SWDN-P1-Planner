@@ -60,19 +60,19 @@
 
 ## FormView: New event
 - Layout form fields
-  - Name
-  - Type (of the event)
+  - [x] Name
+  - [x] Type (of the event)
     - Suggest some types
-  - Host (could be an individual or org)
-    - Idea: Add a checkbox saying "me" that autopopulates the field to user's name
-  - Start date-time
+  - [x] Start date-time
     - Use datetime field
-  - End date-time
+  - [x] End date-time
     - Use datetime field
-  - Guest list
-    - by adding emails
-    - Suggest users that already exist in the platform (another logged in users)
-    - List guests above the field to add more (that helps to see them with the onscreen keyboard)
+  - [x] Host (could be an individual or org)
+    - [x] Idea: Add a checkbox saying "me" that autopopulates the field to user's name
+  - [x] Guest list
+    - [x] by adding emails
+    - [x] Suggest users that already exist in the platform (another logged in users)
+    - [x] List guests above the field to add more (that helps to see them with the onscreen keyboard)
     - Allow removing guests from list with a X (And by swiping horizontally on phones!! that's cool!)
   - Location
     - Request location when focusing to suggest places nearby :D
@@ -107,4 +107,4 @@
 
 ## Automated build process
 - Use gulp
-- include gh-pages
+- include gh-pages for automatic deploy
