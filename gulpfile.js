@@ -33,4 +33,21 @@ gulp.task('deploy', function() {
     .pipe(ghPages());
 });
 
+gulp.task('copy', function() {
+  gulp.src('./js/**/*')
+    .pipe(gulp.dest('dist/js'));
+
+  gulp.src('./css/**/*')
+    .pipe(gulp.dest('dist/css'));
+
+  gulp.src('./img/**/*')
+    .pipe(gulp.dest('dist/img'));
+
+  gulp.src('./lib/**/*')
+    .pipe(gulp.dest('dist/lib'));
+
+  gulp.src('./*.html')
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('default', ['serve']);
