@@ -35,7 +35,7 @@ GuestsList.prototype.enableGuestsList = function() {
   var _addCurrentGuest = function() {
     var guest = this.input.val();
 
-    if(typeof guest === 'string' && this.input.is(':valid')) {
+    if(typeof guest === 'string' && !!guest.length && this.input.is(':valid')) {
       this.addGuest(guest);
       this.input.val('');
       this.printList();

@@ -21,10 +21,8 @@ DataStore.prototype.userInfo = function() {
 };
 
 DataStore.prototype.userEvents = function() {
-  var events = [];
-
   if(!this.currentUser) {
-    return events;
+    return [];
   }
 
   // return those events owned by current user or those where s/he was invited
@@ -32,13 +30,14 @@ DataStore.prototype.userEvents = function() {
     return evt.creator === this.currentUser.email ||
       evt.host === this.currentUser.email ||
       evt.guests.includes(this.currentUser.email);
-  });
+  }.bind(this));
 };
 
 DataStore.prototype.login = function(user) {
   if (user instanceof Array) {
-    user = this.toObject(user);
+    user = DataStore.toObject(user);
   }
+
   this.users[user.email] = user;
   localStorage.setItem(this.USERS_KEY, JSON.stringify(this.users));
 
@@ -51,7 +50,7 @@ DataStore.prototype.logout = function() {
   localStorage.removeItem(this.CURRENT_USER_KEY);
 };
 
-DataStore.prototype.toObject = function(array) {
+DataStore.toObject = function(array) {
   var o = {};
 
   array.forEach(function(elm) {
@@ -70,4 +69,16 @@ DataStore.prototype.toObject = function(array) {
 
 DataStore.prototype.getUsers = function() {
   return this.users;
+};
+
+DataStore.prototype.saveEvent = function(eventData) {
+  debugger;
+  if (eventData instanceof Array) {
+    eventData = DataStore.toObject(eventData);
+  }
+
+  eventData.creator = this.userInfo().email;
+
+  this.events.push(eventData);
+  localStorage.setItem(this.EVENTS_KEY, JSON.stringify(this.events));
 };

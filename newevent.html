@@ -55,6 +55,7 @@
               <small class="text-muted">(required)</small>
             </label>
             <input name="start" type="datetime-local" id="inputStart" class="form-control" required>
+            <i class="glyphicon glyphicon-ok text-success"></i>
           </div>
         </div>
 
@@ -65,6 +66,7 @@
               <small class="text-muted">(required)</small>
             </label>
             <input name="end" type="datetime-local" id="inputEnd" class="form-control" required>
+            <i class="glyphicon glyphicon-ok text-success"></i>
           </div>
         </div>
       </div>
@@ -90,13 +92,12 @@
           <datalist id="guestSuggestions"></datalist>
 
           <span class="input-group-btn">
-            <a type="text" class="btn btn-default" title="Add guest">
+            <a class="btn btn-default" title="Add guest">
               <i class="glyphicon glyphicon-plus"></i>
             </a>
           </span>
         </div>
       </div>
-<!-- ~~~~~ Next: add geolocation by using gps API to prepopulate "location" here -->
 
       <div class="form-group">
         <label for="inputLocation" class="">Location</label>
@@ -127,6 +128,8 @@
   <script src="/js/HostInput.js" type="text/javascript" charset="utf-8"></script>
   <script src="/js/GuestsList.js" type="text/javascript" charset="utf-8"></script>
   <script src="/js/LocationInput.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/ProgressTracker.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/DateRange.js" type="text/javascript" charset="utf-8"></script>
 
   <script type="text/javascript" charset="utf-8" defer>
 
@@ -151,16 +154,23 @@
     // Enable location input to find current location and suggest places around
     new LocationInput('#inputLocation').enable();
 
+    // Dates
+    new DateRange('#inputStart', '#inputEnd').enable();
+
+    // Progress Bar
+    new ProgressTracker(document.querySelector('progress'), form).enable();
+
     // Submit valid form and redirect to list of events
     form.addEventListener('submit', function(event) {
       event.preventDefault();
 
-      var eventData = $(event.target).serializeArray();
+      var eventData = DataStore.toObject($(event.target).serializeArray());
 
-      // ToDo: move this line into dataStore.addEvent method
-      eventData.creator = dataStore.userInfo().email;
+      // store proper guests list
+      delete eventData.inputGuests;
+      eventData.guests = Array.prototype.map.call($('#guests li'), function(e) { return $(e).text(); });
 
-      // dataStore.addEvent(eventData);
+      dataStore.saveEvent(eventData);
 
       window.location.href = 'events.html';
     });

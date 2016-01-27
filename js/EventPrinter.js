@@ -58,6 +58,10 @@ EventPrinter.prototype.populate = function(card, data) {
           d = data.join(', ');
         }
 
+        if(tags[i].dataset && tags[i].dataset.type === 'date') {
+          d = new Date(d).toLocaleString();
+        }
+
         tags[i].innerHTML = d;
       }
     }
