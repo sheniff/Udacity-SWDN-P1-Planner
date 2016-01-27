@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
-
+var ghPages = require('gulp-gh-pages');
 
 gulp.task('serve', ['style'], function() {
 
@@ -27,5 +27,9 @@ gulp.task('style', function() {
     .pipe(browserSync.stream());
 });
 
+gulp.task('deploy', function() {
+  return gulp.src('./**/*')
+    .pipe(ghPages());
+});
 
 gulp.task('default', ['serve']);
