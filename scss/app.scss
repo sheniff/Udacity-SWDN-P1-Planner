@@ -10,12 +10,12 @@ progress {
 
 .form-group {
 
-  input {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+  // input {
+  //   -moz-user-select: none;
+  //   -webkit-user-select: none;
+  //   -ms-user-select: none;
+  //   user-select: none;
+  // }
 
   & > .glyphicon-ok {
     visibility: hidden;
