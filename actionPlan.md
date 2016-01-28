@@ -75,8 +75,8 @@
     - [x] List guests above the field to add more (that helps to see them with the onscreen keyboard)
     - Allow removing guests from list with a X (And by swiping horizontally on phones!! that's cool!)
   - Location
-    - Request location when focusing to suggest places nearby :D
-    - those suggestions should show up above the form field in phones
+    - [x] Request location when focusing to suggest places nearby
+    - [x] those suggestions should show up above the form field in phones
   - Optional Message
     - text area with a maximum length?
 

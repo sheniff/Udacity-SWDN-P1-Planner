@@ -78,7 +78,8 @@ gulp.task('dist', [
   'copy-images',
   'style',
   // 'lint',
-  'scripts-dist'
+  'scripts-dist',
+  'copy-libs'
 ]);
 
 gulp.task('deploy', function() {
