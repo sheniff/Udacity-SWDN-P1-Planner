@@ -5,8 +5,11 @@ var autoprefixer = require('gulp-autoprefixer');
 var ghPages = require('gulp-gh-pages');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var sourcemaps = require('gulp-sourcemaps');
+var imagemin = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
 
-gulp.task('serve', ['scripts', 'copy-images', 'copy-html', 'copy-libs', 'style'], function() {
+gulp.task('serve', ['scripts', 'copy-html', 'copy-libs', 'style'], function() {
   gulp.watch('scss/**/*.scss', ['style']);
   gulp.watch('lib/**/*.js', ['copy-libs']);
   gulp.watch('js/**/*.js', ['scripts']);
@@ -36,8 +39,12 @@ gulp.task('copy-lib', function() {
     .pipe(gulp.dest('dist/lib'));
 });
 
-gulp.task('copy-images', function() {
+gulp.task('images', function() {
   return gulp.src('./img/**/*')
+    .pipe(imagemin({
+      progressive: true,
+      use: [pngquant()]
+    }))
     .pipe(gulp.dest('dist/img'));
 });
 
@@ -54,8 +61,10 @@ gulp.task('scripts', function() {
 
 gulp.task('scripts-dist', function() {
   gulp.src('js/**/*.js')
+    .pipe(sourcemaps.init())
     .pipe(concat('all.js'))
     .pipe(uglify())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('dist/js'));
 });
 
@@ -75,7 +84,7 @@ gulp.task('copy-libs', function() {
 
 gulp.task('dist', [
   'copy-html',
-  'copy-images',
+  'images',
   'style',
   // 'lint',
   'scripts-dist',
