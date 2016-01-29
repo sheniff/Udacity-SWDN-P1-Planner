@@ -1,6 +1,6 @@
 function DateRange(startId, endId) {
   if(!startId || !endId) {
-    return console.error('No IDs provided for start or end date fields!');
+    return window.console.error('No IDs provided for start or end date fields!');
   }
 
   // DOM
@@ -10,10 +10,10 @@ function DateRange(startId, endId) {
 
 DateRange.prototype.enable = function() {
   var now = new Date(),
-      formatDate = function(d) {
-        return new Date(d).toISOString().slice(0, -8)
-      },
-      minDate = formatDate(now.getTime() - now.getTimezoneOffset() * 60000);
+    formatDate = function(d) {
+      return new Date(d).toISOString().slice(0, -8);
+    },
+    minDate = formatDate(now.getTime() - now.getTimezoneOffset() * 60000);
 
   this.startDate.min = minDate;
   this.startDate.value = minDate;

@@ -1,16 +1,16 @@
 function HostInput(groupId) {
   if(!groupId) {
-    return console.error('No ID for group where host input is has been provided!');
+    return window.console.error('No ID for group where host input is has been provided!');
   }
 
   // DOM
-  this.group = $(groupId);
+  this.group = window.$(groupId);
   this.myselfButton = this.group.find('.choose-myself');
   this.input = this.group.find('input');
   this.datalist = this.group.find('datalist');
 
   // Data
-  this.dataStore = new DataStore();
+  this.dataStore = new window.DataStore();
   this.usersList = this.dataStore.getUsers();
   this.me = this.dataStore.userInfo();
 }

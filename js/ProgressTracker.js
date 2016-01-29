@@ -1,10 +1,10 @@
 function ProgressTracker(progressBar, form, disableSubmit) {
   if(!progressBar) {
-    return console.error('No progressBar provided!');
+    return window.console.error('No progressBar provided!');
   }
 
   if(!form) {
-    return console.error('No form provided!');
+    return window.console.error('No form provided!');
   }
 
   this.progressBar = progressBar;

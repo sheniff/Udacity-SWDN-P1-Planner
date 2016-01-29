@@ -1,6 +1,6 @@
 function DataStore() {
   if(!localStorage) {
-    return console.warn('[DataStore] Warning: No localStorage in this browser. Persistence won\'t work!');
+    return window.console.warn('[DataStore] Warning: No localStorage in this browser. Persistence won\'t work!');
   }
 
   this.USERS_KEY = 'UdacityEventPlannerUsers';
@@ -72,7 +72,6 @@ DataStore.prototype.getUsers = function() {
 };
 
 DataStore.prototype.saveEvent = function(eventData) {
-  debugger;
   if (eventData instanceof Array) {
     eventData = DataStore.toObject(eventData);
   }

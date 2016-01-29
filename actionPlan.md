@@ -1,3 +1,9 @@
+ToDO
+- text for screen readers
+- styling
+- Record gif (use genymotion as it tolerates datalists)
+- Deliver!!!!
+
 # Action plan (Brainstorm)
 
 * Note: each view to be an independent HTML for convenience ;) When loading new event or event list we'll check if user is logged in and if not he'll be redirected to signup page :D just by changing the html page, that's easy.
@@ -8,7 +14,7 @@
 - [x] Set up gh project
 - [x] Set up gulp for project
 - [x] Finish High Conversion Forms course
-- [ ] Finish Tools course
+- [x] Finish Tools course
 - [x] Install Bootstrap for project
 
 ## FormView: Sign up
@@ -82,19 +88,19 @@
 
 - Styling (CSS)
   - Mobile first
-    - Label over field in mobile
-    - fields taking whole width (except margins)
-    - progress bar as a thin bar to the top
-    - additional styling for validation (showing a small tick or cross in form)
+    - [x] Label over field in mobile
+    - [x] fields taking whole width (except margins)
+    - [x] progress bar as a thin bar to the top
+    - [x] additional styling for validation (showing a small tick or cross in form)
     - spinner for saving process in "Sign Up" button
     - take care of using fonts with proper resizing for handheld devices
   - desktop later
     - label to left
-    - automatic focus in first field
+    - [x] automatic focus in first field
 
 - Other strategies
-  - Store in local storage to pretend some kind of persistence
-  - Store event creator as well to show in the list of events
+  - [x] Store in local storage to pretend some kind of persistence
+  - [x] Store event creator as well to show in the list of events
 
 
 ## View: Created events
@@ -102,9 +108,11 @@
   - [x] List all the events as cards :D for phone version at least
   - [x] Include buttons to alert "going"/"not going"
 - [x] New event option to the top (fixed, for easier access)
-- Logout button
+- [x] Logout button
 
 
 ## Automated build process
-- Use gulp
-- include gh-pages for automatic deploy
+- [x] Use gulp
+- [x] include gh-pages for automatic deploy
+- Lint
+- sourcemaps (require installing xcode 7 and libtools)

@@ -4,7 +4,7 @@ function FormValidator (form) {
   this.passwordInput = form.querySelector('input[type="password"]');
   this.requiredFields = form.querySelectorAll('input[required]');
   this.submit = form.querySelector('[type="submit"]');
-};
+}
 
 FormValidator.prototype.validateOnChange = function() {
 
@@ -22,7 +22,7 @@ FormValidator.prototype.enablePasswordValidation = function() {
   var validatePassword = function () {
 
     var pass = this.passwordInput.value;
-    var issuesTracker = new IssueTracker();
+    var issuesTracker = new window.IssueTracker();
 
     // check requirements are met for pass
     this.checkRequirements(pass, issuesTracker);
@@ -42,31 +42,31 @@ Just checks the first password because the second should be the same when it run
  */
 FormValidator.prototype.checkRequirements = function(password, tracker) {
   if (password.length < 8) {
-    tracker.add("fewer than 8 characters");
+    tracker.add('fewer than 8 characters');
   } else if (password.length > 100) {
-    tracker.add("greater than 100 characters");
+    tracker.add('greater than 100 characters');
   }
 
   if (!password.match(/[\!\@\#\$\%\^\&\*]/g)) {
-    tracker.add("missing a symbol (!, @, #, $, %, ^, &, *)");
+    tracker.add('missing a symbol (!, @, #, $, %, ^, &, *)');
   }
 
   if (!password.match(/\d/g)) {
-    tracker.add("missing a number");
+    tracker.add('missing a number');
   }
 
   if (!password.match(/[a-z]/g)) {
-    tracker.add("missing a lowercase letter");
+    tracker.add('missing a lowercase letter');
   }
 
   if (!password.match(/[A-Z]/g)) {
-    tracker.add("missing an uppercase letter");
+    tracker.add('missing an uppercase letter');
   }
 
-  var illegalCharacterGroup = password.match(/[^A-z0-9\!\@\#\$\%\^\&\*]/g)
+  var illegalCharacterGroup = password.match(/[^A-z0-9\!\@\#\$\%\^\&\*]/g);
   if (illegalCharacterGroup) {
     illegalCharacterGroup.forEach(function (illegalChar) {
-      tracker.add("includes illegal character: " + illegalChar);
+      tracker.add('includes illegal character: ' + illegalChar);
     });
   }
 };

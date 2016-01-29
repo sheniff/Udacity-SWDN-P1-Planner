@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
@@ -5,14 +7,14 @@ var autoprefixer = require('gulp-autoprefixer');
 var ghPages = require('gulp-gh-pages');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var sourcemaps = require('gulp-sourcemaps');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
+var eslint = require('gulp-eslint');
 
-gulp.task('serve', ['scripts', 'copy-html', 'copy-libs', 'style'], function() {
+gulp.task('serve', ['style', 'lint', 'scripts', 'copy-html', 'copy-libs'], function() {
   gulp.watch('scss/**/*.scss', ['style']);
   gulp.watch('lib/**/*.js', ['copy-libs']);
-  gulp.watch('js/**/*.js', ['scripts']);
+  gulp.watch('js/**/*.js', ['lint', 'scripts']);
   gulp.watch('*.html', ['copy-html']);
 
   gulp.watch('dist/js/*.js').on('change', browserSync.reload);
@@ -32,6 +34,13 @@ gulp.task('style', function() {
     .pipe(autoprefixer())
     .pipe(gulp.dest('dist/css'))
     .pipe(browserSync.stream());
+});
+
+gulp.task('lint', function() {
+  return gulp.src(['js/**/*.js'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failOnError());
 });
 
 gulp.task('copy-lib', function() {
@@ -61,10 +70,8 @@ gulp.task('scripts', function() {
 
 gulp.task('scripts-dist', function() {
   gulp.src('js/**/*.js')
-    .pipe(sourcemaps.init())
     .pipe(concat('all.js'))
     .pipe(uglify())
-    .pipe(sourcemaps.write())
     .pipe(gulp.dest('dist/js'));
 });
 
@@ -86,7 +93,7 @@ gulp.task('dist', [
   'copy-html',
   'images',
   'style',
-  // 'lint',
+  'lint',
   'scripts-dist',
   'copy-libs'
 ]);

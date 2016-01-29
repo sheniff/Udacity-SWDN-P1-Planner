@@ -1,17 +1,17 @@
 function GuestsList(groupId) {
   if(!groupId) {
-    return console.error('No ID for group where guests list is has been provided!');
+    return window.console.error('No ID for group where guests list is has been provided!');
   }
 
   // DOM
-  this.group = $(groupId);
+  this.group = window.$(groupId);
   this.input = this.group.find('input');
   this.datalist = this.group.find('datalist');
   this.addGuestBtn = this.group.find('.btn');
   this.guestsUl = this.group.find('ul');
 
   // Data
-  this.dataStore = new DataStore();
+  this.dataStore = new window.DataStore();
   this.usersList = this.dataStore.getUsers();
   this.guestList = [];
 }
@@ -43,7 +43,7 @@ GuestsList.prototype.enableGuestsList = function() {
   };
 
   var _removeGuest = function(event) {
-    var guest = $(event.target).closest('li').text();
+    var guest = window.$(event.target).closest('li').text();
     this.removeGuest(guest);
     this.printList();
   };
@@ -74,7 +74,7 @@ GuestsList.prototype.printList = function() {
     var li = document.createElement('li');
     li.textContent = this.guestList[i];
 
-    var a = $('<a class="remove"><i class="glyphicon glyphicon-remove"></i></a>');
+    var a = window.$('<a class="remove"><i class="glyphicon glyphicon-remove"></i></a>');
     li.appendChild(a.get(0));
 
     this.guestsUl.append(li);

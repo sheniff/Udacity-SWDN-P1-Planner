@@ -1,6 +1,6 @@
 function NamePrepopulator(form) {
   if(!form) {
-    return console.error('No form provided!');
+    return window.console.error('No form provided!');
   }
 
   this.email = form.querySelector('[type="email"]');

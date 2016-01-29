@@ -1,8 +1,8 @@
 function PasswordRequirementsPopover (popover, passwordInput) {
   if (!popover || !passwordInput) return;
 
-  this.passwordInput = $(passwordInput);
-  this.popover = $(popover);
+  this.passwordInput = window.$(passwordInput);
+  this.popover = window.$(popover);
 
   this.requirements = [
     { text: '8 - 100 characters long', valid: false },
@@ -11,7 +11,7 @@ function PasswordRequirementsPopover (popover, passwordInput) {
     { text: 'Include a number', valid: false },
     { text: 'Include (!, @, #, $, %, ^, &, *)', valid: false }
   ];
-};
+}
 
 PasswordRequirementsPopover.prototype.enable = function() {
   // enable popover
@@ -24,7 +24,7 @@ PasswordRequirementsPopover.prototype.enable = function() {
   this.printRequirements();
 
   // watch changes to reprint
-  this.passwordInput.on('keyup', function(event) {
+  this.passwordInput.on('keyup', function() {
     this.validateRequirements(this.passwordInput.val());
     this.printRequirements();
     this.popover.popover('show');

@@ -25,7 +25,7 @@ EventPrinter.prototype.printEvent = function(evt) {
     return;
   }
 
-  card = document.createElement('div');
+  var card = document.createElement('div');
   card.innerHTML = this.template.text;
 
   this.populate(card, evt);
