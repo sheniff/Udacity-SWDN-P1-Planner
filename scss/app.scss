@@ -123,6 +123,9 @@ progress {
 }
 
 .form-newevent {
+  max-width: 600px;
+  margin: 0 auto;
+
   input[type="datetime-local"].form-control {
     padding-bottom: 4px;
     padding-top: 4px;
@@ -145,5 +148,12 @@ progress {
     a {
       float: right;
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-header {
+    margin-right: -15px !important;
+    float: none !important;
   }
 }

@@ -1,12 +1,8 @@
-ToDO
-- Record gif (use genymotion as it tolerates datalists)
-- Deliver!!!!
-
 # Action plan (Brainstorm)
 
-* Note: each view to be an independent HTML for convenience ;) When loading new event or event list we'll check if user is logged in and if not he'll be redirected to signup page :D just by changing the html page, that's easy.
-* Note: use bower for packages (only bootstrap CSS for now)
-* Note: structure folders in html/css/js/lib for further minification and stuff
+* Note: each view to be an independent HTML for convenience. When loading new event or event list we'll check if user is logged in and if not he'll be redirected to signup page. Just by changing the html page, that's easy.
+* Note: use bower for packages (only bootstrap and JQuery for convenience)
+* Note: structure folders in css/js/lib for further minification and stuff
 
 ## Before starting...
 - [x] Set up gh project
@@ -27,8 +23,7 @@ ToDO
     - [x] Make secure validation (as done in high conversion form course)
     - [x] Add option to reveal password (eye icon) instead of asking the user for repeating the password (that's annoying and so '90s...)
   - Optional bio
-    - [x] Idea: we can show this bio section separated with a horizontal line and only showing one of the fields and make the rest appear when the user focuses on the first one? Or under a collapsed courtain (TBD)
-      -> UPDATE: change this "courtained" fields for a button saying "more about you (optional)" and then show the fields if clicked
+    - [x] Idea: Button saying "Full bio (optional)" and then show the fields if clicked
 
 - Apply usability strategies
   - [x] Clearly indicate mandatory fields (typical asterisk?)
@@ -51,15 +46,14 @@ ToDO
     - additional styling for validation (showing a small tick or cross in form)
     - spinner for saving process in "Sign Up" button
     - take care of using fonts with proper resizing for handheld devices
-    - use em for font sizes!! (for proper resizing)
   - desktop later
-    - label to left
+    - fixed maximum width
     - automatic focus in first field
     - maybe password validation can be done while typing showing tick/cross to right of field?
 
 - Other strategies
   - [x] Store in local storage to pretend some kind of persistence
-  - [x] This persistence is useful to show suggested guests :)
+  - [x] This persistence is useful to show suggested guests
 
 
 ## FormView: New event
@@ -82,7 +76,6 @@ ToDO
     - [x] Request location when focusing to suggest places nearby
     - [x] those suggestions should show up above the form field in phones
   - Optional Message
-    - text area with a maximum length?
 
 - Styling (CSS)
   - Mobile first
@@ -90,8 +83,6 @@ ToDO
     - [x] fields taking whole width (except margins)
     - [x] progress bar as a thin bar to the top
     - [x] additional styling for validation (showing a small tick or cross in form)
-    - spinner for saving process in "Sign Up" button
-    - take care of using fonts with proper resizing for handheld devices
   - desktop later
     - label to left
     - [x] automatic focus in first field
@@ -112,5 +103,4 @@ ToDO
 ## Automated build process
 - [x] Use gulp
 - [x] include gh-pages for automatic deploy
-- Lint
-- sourcemaps (require installing xcode 7 and libtools)
+- [x] Lint
