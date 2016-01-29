@@ -1,5 +1,4 @@
 ToDO
-- styling
 - Record gif (use genymotion as it tolerates datalists)
 - Deliver!!!!
 

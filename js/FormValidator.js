@@ -14,6 +14,9 @@ FormValidator.prototype.validateOnChange = function() {
     field.addEventListener('keyup', function(event) {
       this.parentNode.classList[event.target.validity.valid ? 'add' : 'remove']('valid');
     }.bind(field));
+    field.addEventListener('change', function(event) {
+      this.parentNode.classList[event.target.validity.valid ? 'add' : 'remove']('valid');
+    }.bind(field));
   }
 
 };

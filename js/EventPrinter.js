@@ -55,7 +55,7 @@ EventPrinter.prototype.populate = function(card, data) {
         var d = data[attr];
 
         if(d instanceof Array) {
-          d = data.join(', ');
+          d = d.join(', ');
         }
 
         if(tags[i].dataset && tags[i].dataset.type === 'date') {
