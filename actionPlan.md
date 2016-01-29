@@ -1,5 +1,4 @@
 ToDO
-- text for screen readers
 - styling
 - Record gif (use genymotion as it tolerates datalists)
 - Deliver!!!!

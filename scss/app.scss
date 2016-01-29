@@ -6,6 +6,7 @@ body {
 
 progress {
   width: 100%;
+  position: fixed;
 }
 
 .form-group {
@@ -128,5 +129,20 @@ progress {
 
   .input-group-btn a {
     padding: 11px;
+  }
+}
+
+#guests {
+  padding-left: 0;
+
+  li {
+    list-style: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+
+    a {
+      float: right;
+    }
   }
 }

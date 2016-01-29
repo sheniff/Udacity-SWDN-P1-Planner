@@ -12,6 +12,14 @@ NamePrepopulator.prototype.enable = function() {
 
     if(this.email.checkValidity() && !this.name.value.length) {
       this.name.value = this.email.value.split('@')[0];
+
+      // trigger name checker to verify proper name
+      if ('createEvent' in document) {
+        var evt = document.createEvent('HTMLEvents');
+        evt.initEvent('keyup', false, true);
+        this.name.dispatchEvent(evt);
+      }
+      else this.name.fireEvent('onkeyup');
     }
 
   }.bind(this));
