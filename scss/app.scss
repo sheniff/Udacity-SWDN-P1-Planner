@@ -102,7 +102,7 @@ progress {
 .events {
   padding-top: 70px;
 
-  #newEvent {
+  .create-new-event {
     background-color: #ddd;
     border-left: 1px solid #bbb;
     transition: 0.3s;
@@ -148,5 +148,26 @@ progress {
   .navbar-header {
     margin-right: -15px !important;
     float: none !important;
+  }
+}
+
+@media (max-width: 500px) {
+  #username {
+    max-width: 260px;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+  }
+
+  .create-new-event span {
+    display: none;
+  }
+}
+
+
+@media (max-width: 320px) {
+  #username {
+    max-width: 92px;
   }
 }
