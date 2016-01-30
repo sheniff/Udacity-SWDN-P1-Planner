@@ -42,11 +42,24 @@ DataStore.prototype.userEvents = function() {
   }
 
   // return those events owned by current user or those where s/he was invited
-  return this.events.filter(function(evt) {
+  var events = this.events.filter(function(evt) {
     return evt.creator === this.currentUser.email ||
       evt.host === this.currentUser.email ||
       evt.guests.includes(this.currentUser.email);
   }.bind(this));
+
+  // if there are no events for this user, add a dummy one
+  events = [{
+    title: 'Party @ Example.org!',
+    host: 'organizer@example.org',
+    guests: ['myfriend@example.org', 'thatguy@example.org', 'you@example.org'],
+    start: new Date(2016, 2, 10, 20),
+    end: new Date(2016, 2, 10, 22),
+    location: 'Example.org HQ (777 Bryant St)',
+    message: 'Let\'s all have fun together celebrating the 150th anniversary of this emblematic fake company!'
+  }];
+
+  return events;
 };
 
 /**
