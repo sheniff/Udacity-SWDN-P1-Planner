@@ -15,18 +15,24 @@ function FormValidator (form) {
 * @description Enables input listeners to validate required fields and tag them as valid when requirements are met
 */
 FormValidator.prototype.validateOnChange = function() {
+  var showValidity = function(field) {
+    window.setTimeout(function() {
+      field.reportValidity();
+    }, 1);
+  };
 
   for (var i = 0; i < this.requiredFields.length; i++) {
     var field = this.requiredFields[i];
 
     field.addEventListener('keyup', function(event) {
-      this.parentNode.classList[event.target.validity.valid ? 'add' : 'remove']('valid');
+      this.parentNode.classList[event.target.checkValidity() ? 'add' : 'remove']('valid');
     }.bind(field));
+
     field.addEventListener('change', function(event) {
-      this.parentNode.classList[event.target.validity.valid ? 'add' : 'remove']('valid');
+      this.parentNode.classList[event.target.checkValidity() ? 'add' : 'remove']('valid');
+      showValidity(this);
     }.bind(field));
   }
-
 };
 
 /**
