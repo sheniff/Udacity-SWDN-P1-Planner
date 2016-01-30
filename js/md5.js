@@ -2,6 +2,7 @@
 * @description Converts string to MD5
 * @constructor
 * @param {string} string - Input to convert to MD5
+* @author http://www.myersdaily.org/joseph/javascript/md5-text.html
 */
 window.MD5 = function (string) {
 
