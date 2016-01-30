@@ -37,12 +37,12 @@
         </label>
         <input name="type" type="text" list="reasons" id="inputType" class="form-control" placeholder="Informal meeting" required>
         <datalist id="reasons">
-          <option value="Dinner"></option>
-          <option value="Get together"></option>
-          <option value="Lunch"></option>
-          <option value="Informal meeting"></option>
-          <option value="Important discussion"></option>
-          <option value="Work meeting"></option>
+          <option value="Dinner" label="Dinner"></option>
+          <option value="Get together" label="Get together"></option>
+          <option value="Lunch" label="Lunch"></option>
+          <option value="Informal meeting" label="Informal meeting"></option>
+          <option value="Important discussion" label="Important discussion"></option>
+          <option value="Work meeting" label="Work meeting"></option>
         </datalist>
         <i class="glyphicon glyphicon-ok text-success"></i>
       </div>
@@ -75,8 +75,8 @@
         <label for="inputHost" class="">Host</label>
         <div class="input-group">
           <span class="input-group-btn">
-            <a type="text" class="btn btn-default choose-myself" title="Add guest">Myself</a>
-            <button type="text" class="btn btn-link" disabled>or</button>
+            <a class="btn btn-default choose-myself" title="Add guest">Myself</a>
+            <button class="btn btn-link" disabled>or</button>
           </span>
           <input name="host" type="text" id="inputHost" class="form-control" placeholder="james@example.org" list="hosts">
           <datalist id="hosts"></datalist>
@@ -125,7 +125,7 @@
 
   <script src="js/all.js"></script>
 
-  <script defer>
+  <script>
 
     var form = document.querySelector('form#newEvent');
     var dataStore = new DataStore();
