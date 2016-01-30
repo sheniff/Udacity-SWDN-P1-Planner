@@ -1,9 +1,20 @@
+/**
+* @description Print a list of events or default "No events" screen.
+* @constructor
+* @param {DOM Element} holder - Parent element where list of templates will be printed
+* @param {DOM Element} eventTemplate - HTML template to be replicated and populated with every event's data.
+* @param {DOM Element} noEventsTemplate - HTML template to show when there are no events to show.
+*/
 function EventPrinter(holder, eventTemplate, noEventsTemplate) {
   this.parent = holder;
   this.template = eventTemplate;
   this.noEventsTemplate = noEventsTemplate;
 }
 
+/**
+* @description Prints a list of events after cleaning previous one
+* @param {Array} List of event objects to print
+*/
 EventPrinter.prototype.printEvents = function(events) {
   this.clearEventList();
 
@@ -20,6 +31,10 @@ EventPrinter.prototype.printEvents = function(events) {
   }
 };
 
+/**
+* @description Prints one given event and appends it to the list of events to show
+* @param {Object} Event data to display
+*/
 EventPrinter.prototype.printEvent = function(evt) {
   if (!(evt instanceof Object) || !this.parent || !this.template) {
     return;
@@ -33,18 +48,29 @@ EventPrinter.prototype.printEvent = function(evt) {
   this.parent.appendChild(card);
 };
 
+/**
+* @description Prints default template indicating there are no events to show
+*/
 EventPrinter.prototype.printNoEvents = function() {
   if (this.noEventsTemplate && this.parent) {
     this.parent.innerHTML = this.noEventsTemplate.text;
   }
 };
 
+/**
+* @description Cleans up event list
+*/
 EventPrinter.prototype.clearEventList = function() {
   if(this.parent) {
     this.parent.innerHTML = '';
   }
 };
 
+/**
+* @description Write all event's data into a given template instance
+* @param {DOM Object} Template instance to print event data in
+* @param {Object} Event data to display
+*/
 EventPrinter.prototype.populate = function(card, data) {
   if(card && data instanceof Object) {
 

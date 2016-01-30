@@ -1,3 +1,8 @@
+/**
+* @description Contains methods related to special form validation
+* @constructor
+* @param {DOM Element} Form to validate
+*/
 function FormValidator (form) {
   if (!form) return;
 
@@ -6,6 +11,9 @@ function FormValidator (form) {
   this.submit = form.querySelector('[type="submit"]');
 }
 
+/**
+* @description Enables input listeners to validate required fields and tag them as valid when requirements are met
+*/
 FormValidator.prototype.validateOnChange = function() {
 
   for (var i = 0; i < this.requiredFields.length; i++) {
@@ -21,6 +29,9 @@ FormValidator.prototype.validateOnChange = function() {
 
 };
 
+/**
+* @description Enables password validation on submit and on text change
+*/
 FormValidator.prototype.enablePasswordValidation = function() {
   var validatePassword = function () {
 
@@ -40,9 +51,11 @@ FormValidator.prototype.enablePasswordValidation = function() {
 };
 
 /*
-This steps through all of the requirements and adds messages when a requirement fails.
-Just checks the first password because the second should be the same when it runs.
- */
+* @description This steps through all of the requirements and adds messages when a requirement fails.
+*               Just checks the first password because the second should be the same when it runs.
+* @param {String} password - String to be validated under a list of requirements
+* @param {IssueTracker} - object to report those unmet requirements to
+*/
 FormValidator.prototype.checkRequirements = function(password, tracker) {
   if (password.length < 8) {
     tracker.add('fewer than 8 characters');

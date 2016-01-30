@@ -1,3 +1,8 @@
+/**
+* @description Interactive list of guests to add and remove elements of guests list.
+* @constructor
+* @param {String} DOM id for parent tag that groups all guests list HTML
+*/
 function GuestsList(groupId) {
   if(!groupId) {
     return window.console.error('No ID for group where guests list is has been provided!');
@@ -16,11 +21,17 @@ function GuestsList(groupId) {
   this.guestList = [];
 }
 
+/*
+* @description It populates list of suggested guests and prepare component to add/remove guests to list
+*/
 GuestsList.prototype.enable = function() {
   this.populateDatalist();
   this.enableGuestsList();
 };
 
+/*
+* @description Populates datalist of suggestions to add as guests to event
+*/
 GuestsList.prototype.populateDatalist = function() {
   this.datalist.empty();
 
@@ -31,6 +42,9 @@ GuestsList.prototype.populateDatalist = function() {
   }
 };
 
+/*
+* @description Enables logic to add guests via input field and remove them from list of invitees
+*/
 GuestsList.prototype.enableGuestsList = function() {
   var _addCurrentGuest = function() {
     var guest = this.input.val();
@@ -53,12 +67,20 @@ GuestsList.prototype.enableGuestsList = function() {
   this.guestsUl.off().on('click', 'a.remove', _removeGuest.bind(this));
 };
 
+/*
+* @description Adds a guest to the list of invitees
+* @param {String} guest - guest email address
+*/
 GuestsList.prototype.addGuest = function(guest) {
   if(typeof guest === 'string' && !this.guestList.includes(guest)) {
     this.guestList.push(guest);
   }
 };
 
+/*
+* @description Removes a guest from list of invitees
+* @param {String} guest - guest email address
+*/
 GuestsList.prototype.removeGuest = function(guest) {
   var pos = this.guestList.indexOf(guest);
 
@@ -67,6 +89,9 @@ GuestsList.prototype.removeGuest = function(guest) {
   }
 };
 
+/*
+* @description Clears up and prints list of current guests invited to event
+*/
 GuestsList.prototype.printList = function() {
   this.guestsUl.empty();
 

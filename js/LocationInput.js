@@ -1,3 +1,8 @@
+/**
+* @description Uses Google Locations API to suggest nearby locations for the event
+* @constructor
+* @param {string} inputId - DOM id of the input field that'll be provided with this feature. Should have a linked datalist next to it.
+*/
 function LocationInput(inputId) {
   if(!inputId) {
     return window.console.error('No ID for input where to place location!');
@@ -8,6 +13,9 @@ function LocationInput(inputId) {
   this.datalist = this.input.next('datalist');
 }
 
+/*
+* @description Prepares suggestions system if google maps API is found
+*/
 LocationInput.prototype.enable = function() {
   if(window.google && window.google.maps && window.google.maps.places) {
     this.printList(['Finding places nearby...']);
@@ -15,6 +23,10 @@ LocationInput.prototype.enable = function() {
   }
 };
 
+/*
+* @description Prints a new list of suggestions based on GPS data
+* @param {Object} position - GPS data provided by navigator.location API
+*/
 LocationInput.prototype.updateLocationList = function(position) {
   var printResults = function(results, status) {
     if (status == window.google.maps.places.PlacesServiceStatus.OK) {
@@ -35,6 +47,11 @@ LocationInput.prototype.updateLocationList = function(position) {
   this.printList(['Finding places...']);
 };
 
+/*
+* @description Fetches location from device
+* @param {function} cb - callback to trigger if location is fetched
+* @param {function} errCb - error callback
+*/
 LocationInput.prototype.getLocation = function(cb, errCb) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(cb, errCb);
@@ -43,6 +60,10 @@ LocationInput.prototype.getLocation = function(cb, errCb) {
   }
 };
 
+/*
+* @description Prints given list of suggested places into datalist
+* @param {Array} places - list of strings to show
+*/
 LocationInput.prototype.printList = function(places) {
   this.datalist.empty();
 
@@ -55,6 +76,9 @@ LocationInput.prototype.printList = function(places) {
   }
 };
 
+/*
+* @description Initializes google places API and adds listener to input field to fetch locations when focusing in
+*/
 LocationInput.prototype.initGooglePlaces = function() {
   this.googlePlaces = new window.google.maps.places.PlacesService(new window.google.maps.Map(document.getElementById('map')));
 

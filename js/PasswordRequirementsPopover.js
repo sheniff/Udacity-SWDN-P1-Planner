@@ -1,3 +1,9 @@
+/**
+* @description Displays a floating popover over password field to help with validation
+* @constructor
+* @param {DOM Element} popover - Element where popover will be attached to
+* @param {DOM Element} passwordInput - Input field for password
+*/
 function PasswordRequirementsPopover (popover, passwordInput) {
   if (!popover || !passwordInput) return;
 
@@ -13,6 +19,9 @@ function PasswordRequirementsPopover (popover, passwordInput) {
   ];
 }
 
+/*
+* @description Enables popover, validates requirement and updates them on key strokes
+*/
 PasswordRequirementsPopover.prototype.enable = function() {
   // enable popover
   this.popover.popover();
@@ -31,6 +40,10 @@ PasswordRequirementsPopover.prototype.enable = function() {
   }.bind(this));
 };
 
+/*
+* @description Scans requirements for given password
+* @param {string} password - string to validate against a stablished list of criteria
+*/
 PasswordRequirementsPopover.prototype.validateRequirements = function(password) {
 
   this.requirements[0].valid = password.length >= 8 && password.length <= 100;
@@ -40,6 +53,9 @@ PasswordRequirementsPopover.prototype.validateRequirements = function(password) 
   this.requirements[4].valid = password.match(/[\!\@\#\$\%\^\&\*]/g);
 };
 
+/*
+* @description Prints all requirements as an HTML list to display in popover along with a check if it was met or not
+*/
 PasswordRequirementsPopover.prototype.printRequirements = function() {
   var str = '<ul class="list-unstyled">';
 

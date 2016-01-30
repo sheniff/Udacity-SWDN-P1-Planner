@@ -1,3 +1,8 @@
+/**
+* @description Prepopulates form's username field with email's user
+* @constructor
+* @param {DOM Element} form - Form DOM where email input and username input fields should be
+*/
 function NamePrepopulator(form) {
   if(!form) {
     return window.console.error('No form provided!');
@@ -7,6 +12,9 @@ function NamePrepopulator(form) {
   this.name = form.querySelector('input#inputName');
 }
 
+/*
+* @description Adds event listener to auto populate username when email field is left
+*/
 NamePrepopulator.prototype.enable = function() {
   this.email.addEventListener('blur', function() {
 
