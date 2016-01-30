@@ -72,20 +72,20 @@
       </div>
 
       <div class="form-group" id="inputHostGroup">
-        <label for="inputHost" class="">Host</label>
+        <label for="inputHost" class="">Host <small class="text-muted">(required)</small></label>
         <div class="input-group">
           <span class="input-group-btn">
             <a class="btn btn-default choose-myself" title="Add guest">Myself</a>
             <button class="btn btn-link" disabled>or</button>
           </span>
-          <input name="host" type="text" id="inputHost" class="form-control" placeholder="james@example.org" list="hosts">
+          <input name="host" type="text" id="inputHost" class="form-control" placeholder="james@example.org" list="hosts" required>
           <datalist id="hosts"></datalist>
         </div>
       </div>
 
       <div class="form-group" id="guestsListGroup">
 
-        <label for="inputGuest" class="">Guests</label>
+        <label for="inputGuest" class="">Guests <small class="text-muted">(required)</small></label>
         <ul id="guests"></ul>
         <div class="input-group">
           <input name="inputGuests" type="email" id="inputGuest" class="form-control" placeholder="myguest@example.org" list="guestSuggestions">
@@ -100,8 +100,8 @@
       </div>
 
       <div class="form-group">
-        <label for="inputLocation" class="">Location</label>
-        <input name="location" type="text" id="inputLocation" class="form-control" placeholder="80 Folsom Ave, San Francisco, CA" list="locationList">
+        <label for="inputLocation" class="">Location <small class="text-muted">(required)</small></label>
+        <input name="location" type="text" id="inputLocation" class="form-control" placeholder="80 Folsom Ave, San Francisco, CA" list="locationList" required>
         <datalist id="locationList"></datalist>
         <div id="map" style="display:none;"></div>
       </div>

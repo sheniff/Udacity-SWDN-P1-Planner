@@ -27,6 +27,9 @@ function GuestsList(groupId) {
 GuestsList.prototype.enable = function() {
   this.populateDatalist();
   this.enableGuestsList();
+
+  // initialize the field as invalid for not having anyone invited to event
+  this._invalidateEmptyList();
 };
 
 /*
@@ -47,12 +50,14 @@ GuestsList.prototype.populateDatalist = function() {
 */
 GuestsList.prototype.enableGuestsList = function() {
   var _addCurrentGuest = function() {
-    var guest = this.input.val();
+    var guest = this.input.val(),
+      i = this.input.get(0);
 
-    if(typeof guest === 'string' && !!guest.length && this.input.is(':valid')) {
+    if (!i.validity.valueMissing && !i.validity.typeMismatch) {
       this.addGuest(guest);
       this.input.val('');
       this.printList();
+      i.setCustomValidity('');
     }
   };
 
@@ -60,6 +65,7 @@ GuestsList.prototype.enableGuestsList = function() {
     var guest = window.$(event.target).closest('li').text();
     this.removeGuest(guest);
     this.printList();
+    this._invalidateEmptyList();
   };
 
   this.addGuestBtn.off().on('click', _addCurrentGuest.bind(this));
@@ -103,5 +109,11 @@ GuestsList.prototype.printList = function() {
     li.appendChild(a.get(0));
 
     this.guestsUl.append(li);
+  }
+};
+
+GuestsList.prototype._invalidateEmptyList = function() {
+  if(!this.guestList.length) {
+    this.input.get(0).setCustomValidity('You should invite at least one person to your event.');
   }
 };
