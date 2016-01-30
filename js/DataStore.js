@@ -49,15 +49,17 @@ DataStore.prototype.userEvents = function() {
   }.bind(this));
 
   // if there are no events for this user, add a dummy one
-  events = [{
-    title: 'Party @ Example.org!',
-    host: 'organizer@example.org',
-    guests: ['myfriend@example.org', 'thatguy@example.org', 'you@example.org'],
-    start: new Date(2016, 2, 10, 20),
-    end: new Date(2016, 2, 10, 22),
-    location: 'Example.org HQ (777 Bryant St)',
-    message: 'Let\'s all have fun together celebrating the 150th anniversary of this emblematic fake company!'
-  }];
+  if (!events.length) {
+    events = [{
+      title: 'Party @ Example.org!',
+      host: 'organizer@example.org',
+      guests: ['myfriend@example.org', 'thatguy@example.org', 'you@example.org'],
+      start: new Date(2016, 2, 10, 20),
+      end: new Date(2016, 2, 10, 22),
+      location: 'Example.org HQ (777 Bryant St)',
+      message: 'Let\'s all have fun together celebrating the 150th anniversary of this emblematic fake company!'
+    }];
+  }
 
   return events;
 };
