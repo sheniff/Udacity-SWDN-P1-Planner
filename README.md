@@ -2,6 +2,8 @@
 ## Udacity : Senior Web Developer Nanodegree
 
 ### How to run it
+`$> npm i` to install all dependencies and libraries via bower (automatically run as postinstall dependency)
+
 `$> gulp` command runs local server and lifts the app
 
 `$> gulp dist` builds dist package, ready to deploy
