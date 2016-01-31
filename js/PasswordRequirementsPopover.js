@@ -34,28 +34,26 @@ PasswordRequirementsPopover.prototype.enable = function() {
 
   // watch changes to reprint
   this.passwordInput.on('keyup', function() {
-    var invalidPassword = this.validateRequirements(this.passwordInput.val());
+    var validPassword = this.validateRequirements(this.passwordInput.val());
     this.printRequirements();
     this.popover.popover('show');
-    this.passwordInput.get(0).setCustomValidity(invalidPassword ? 'Invalid password. Follow the tips above.' : '');
+    this.passwordInput.get(0).setCustomValidity(validPassword ? '' : 'Invalid password. Follow the tips above.');
   }.bind(this));
 };
 
 /*
 * @description Scans requirements for given password
 * @param {string} password - string to validate against a stablished list of criteria
+* @returns {boolean} True if all requirements are met
 */
 PasswordRequirementsPopover.prototype.validateRequirements = function(password) {
-  var isInvalid = false,
-    req = this.requirements;
+  this.requirements[0].valid = password.length >= 8 && password.length <= 100;
+  this.requirements[1].valid = !!password.match(/[a-z]/g);
+  this.requirements[2].valid = !!password.match(/[A-Z]/g);
+  this.requirements[3].valid = !!password.match(/\d/g);
+  this.requirements[4].valid = !!password.match(/[\!\@\#\$\%\^\&\*]/g);
 
-  isInvalid = (req[0].valid = password.length >= 8 && password.length <= 100) || isInvalid;
-  isInvalid = (req[1].valid = !!password.match(/[a-z]/g)) || isInvalid;
-  isInvalid = (req[2].valid = !!password.match(/[A-Z]/g)) || isInvalid;
-  isInvalid = (req[3].valid = !!password.match(/\d/g)) || isInvalid;
-  isInvalid = (req[4].valid = !!password.match(/[\!\@\#\$\%\^\&\*]/g)) || isInvalid;
-
-  return isInvalid;
+  return this.requirements.reduce(function(t, e) { return t && e.valid; }, true);
 };
 
 /*
