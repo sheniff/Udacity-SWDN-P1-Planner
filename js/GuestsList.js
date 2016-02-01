@@ -25,11 +25,22 @@ function GuestsList(groupId) {
 * @description It populates list of suggested guests and prepare component to add/remove guests to list
 */
 GuestsList.prototype.enable = function() {
+  var _showValidity = function(field) {
+    window.setTimeout(function() {
+      field.reportValidity();
+    }, 1);
+  };
+
   this.populateDatalist();
   this.enableGuestsList();
 
   // initialize the field as invalid for not having anyone invited to event
   this._invalidateEmptyList();
+
+  // detect field's blur to inform user this list shouldn't be empty (if needed)
+  this.input.on('blur', function() {
+    _showValidity(event.target);
+  });
 };
 
 /*
