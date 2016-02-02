@@ -25,12 +25,6 @@ function GuestsList(groupId) {
 * @description It populates list of suggested guests and prepare component to add/remove guests to list
 */
 GuestsList.prototype.enable = function() {
-  var _showValidity = function(field) {
-    window.setTimeout(function() {
-      field.reportValidity();
-    }, 1);
-  };
-
   this.populateDatalist();
   this.enableGuestsList();
 
@@ -39,8 +33,15 @@ GuestsList.prototype.enable = function() {
 
   // detect field's blur to inform user this list shouldn't be empty (if needed)
   this.input.on('blur', function() {
-    _showValidity(event.target);
-  });
+    if(!this.guestList.length) {
+      if(this.input.val() && this.input.get(0).validity.typeMismatch) {
+        this._makeValid();  // default validity will take care
+      } else {
+        this._invalidateEmptyList(); // if a valid input is in place but not saved to list, notify
+      }
+      this._showValidity();
+    }
+  }.bind(this));
 };
 
 /*
@@ -64,11 +65,15 @@ GuestsList.prototype.enableGuestsList = function() {
     var guest = this.input.val(),
       i = this.input.get(0);
 
-    if (!i.validity.valueMissing && !i.validity.typeMismatch) {
-      this.addGuest(guest);
-      this.input.val('');
-      this.printList();
-      i.setCustomValidity('');
+    if(guest.length) {
+      if (i.validity.typeMismatch) {
+        this._showValidity();
+      } else {
+        this.addGuest(guest);
+        this.input.val('');
+        this.printList();
+        this._makeValid();  // valid field
+      }
     }
   };
 
@@ -80,7 +85,14 @@ GuestsList.prototype.enableGuestsList = function() {
   };
 
   this.addGuestBtn.off().on('click', _addCurrentGuest.bind(this));
-  this.input.off().on('change', _addCurrentGuest.bind(this));
+  this.input.off().on('keyup', function(event) {
+    if(event.target.validity.customError) {
+      this._makeValid();
+    }
+    if(event.keyCode === 13) {
+      _addCurrentGuest.call(this);
+    }
+  }.bind(this));
   this.guestsUl.off().on('click', 'a.remove', _removeGuest.bind(this));
 };
 
@@ -123,8 +135,24 @@ GuestsList.prototype.printList = function() {
   }
 };
 
+// Private methods
+
+GuestsList.prototype._setValidity = function(message) {
+  this.input.get(0).setCustomValidity(message || '');
+};
+
 GuestsList.prototype._invalidateEmptyList = function() {
   if(!this.guestList.length) {
-    this.input.get(0).setCustomValidity('You should invite at least one person to your event.');
+    this._setValidity('You should invite at least one person to your event.');
   }
+};
+
+GuestsList.prototype._makeValid = function() {
+  this._setValidity();
+};
+
+GuestsList.prototype._showValidity = function() {
+  window.setTimeout(function() {
+    this.input.get(0).reportValidity();
+  }.bind(this), 1);
 };
